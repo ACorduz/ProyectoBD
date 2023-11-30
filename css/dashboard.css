@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+}
+
+#menu {
+    width: 200px;
+    height: 100vh;
+    color: black;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #bfc0c2;
+    position: relative;
+    top: 0;
+    left: 0;
+    border-left: 1.5px;
+    border-right: 1px black solid;
+
+    @media (max-width: 768px) {
+        width: 100%;
+        position: static;
+        padding: 10px;
+    }
+}
+
+.contenido {
+    flex: 1;
+    box-sizing: border-box;
+    padding: 20px;
+
+    #titulo {
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%; /* Asegurarse de que ocupa el 100% en dispositivos pequeños */
+        float: none; /* Desactivar float en dispositivos pequeños */
+    }
+}
+
+/* Estilos adicionales para mejorar la apariencia en dispositivos más pequeños */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+}

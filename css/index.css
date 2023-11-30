@@ -1,0 +1,27 @@
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+header{
+    background-color: #bfc0c2; 
+    color:black; 
+    padding: 15px;
+    
+}
+
+.main{
+    border: 1px black solid;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 15px;
+}
+
+.login{
+    background-color: #bfc0c2;
+    border: #bfc0c2;
+    color: black;
+}
+
