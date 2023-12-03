@@ -1,37 +1,29 @@
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
-}
-
-.titulo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
+  font-size: 0.84vw;
 }
 
 .sidebar_menu {
   height: 100%;
-  width: 290px;
+  width: 18vw;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   overflow-x: hidden;
-  padding-top: 20px;
+  padding-top: 2%;
   background-color: #f1f1f1;
-}
-
-.sol_activas {
-  margin-left: 100px;
-  padding: 0px 10px;
-  margin-bottom: 200px;
-}
-
-.hist_sol {
-  margin-left: 100px;
-  padding: 0px 10px;
 }
 
 .sidebar_menu h3 {
@@ -46,7 +38,7 @@ body {
 
 .sidebar_menu li {
   padding: 0;
-  margin: 80px;
+  margin: 27.59%;
   font-weight: bold;
   cursor: pointer;
 }
@@ -55,24 +47,42 @@ body {
   text-decoration: underline;
 }
 
+.sidebar_menu img {
+  max-width: 100%;
+  height: auto;
+}
+
 .cerrar_sesion {
   position: absolute;
-  bottom: 60px;
-  left: 50px;
+  bottom: 8.5%;
+  left: 20%;
   cursor: pointer;
   font-weight: bold;
 }
 
+.contenido {
+  padding: 1.23%;
+  box-sizing: border-box;
+  margin-left: 15.1%;
+  margin-right: 0%;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 table {
-  width: 1200px;
+  width: 65vw;
   border-collapse: collapse;
-  margin-top: 40px;
+  margin-top: 2vw;
 }
 
 th,
 td {
-  border: 1px solid #ddd;
-  padding: 8px;
+  border: 0.1vw solid #ddd;
+  padding: 0.4vw;
   text-align: center;
 }
 
@@ -84,8 +94,7 @@ tr:hover {
   background-color: #f5f5f5;
 }
 
-.contenido {
-  padding: 20px;
-  box-sizing: border-box;
-  margin-left: 290px; 
+.contenedor_tablas {
+  margin: 0 10%;
+  text-align: left;
 }

@@ -1,0 +1,206 @@
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.84vw;
+}
+
+.sidebar_menu {
+  height: 100%;
+  width: 18vw;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 2%;
+  background-color: #f1f1f1;
+}
+
+.sidebar_menu h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar_menu ul {
+  padding: 0;
+}
+
+.sidebar_menu li {
+  padding: 0;
+  margin: 27.59%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.sidebar_menu ul li:nth-child(3) {
+  text-decoration: underline;
+}
+
+.sidebar_menu img {
+  max-width: 100%;
+  height: auto;
+}
+
+.cerrar_sesion {
+  position: absolute;
+  bottom: 8.5%;
+  left: 20%;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.contenido {
+  padding: 1.23%;
+  box-sizing: border-box;
+  margin-left: 15.1%;
+  margin-right: 0%;
+}
+
+.contenedor_sol {
+  margin: 0 24.54%;
+  max-width: 50%;
+  background-color: #f1f1f1;
+  text-align: left;
+  border: 1px solid #000000;
+}
+
+.solicitud {
+  margin: 0 auto;
+  max-width: 75%;
+  padding: 2.5%;
+}
+
+#numero_sol,
+#requisitos_bool_sol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#requisitos_bool_sol {
+  font-weight: bold;
+  font-style: italic;
+}
+
+#comentarios_est_sol {
+  flex: 1;
+  margin-right: 60px;
+}
+
+.button-4 {
+  font-size: 0.8vw;
+  margin-top: auto;
+  appearance: none;
+  background-color: #fafbfc;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292e;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  line-height: 150%;
+  list-style: none;
+  padding: 1.2% 3.2%;
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+  height: 100%;
+}
+
+.button-4:hover {
+  background-color: #f3f4f6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.button-4:disabled {
+  background-color: #fafbfc;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959da5;
+  cursor: default;
+}
+
+.button-4:active {
+  background-color: #edeff2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button-4:focus {
+  outline: 1px transparent;
+}
+
+.button-4:before {
+  display: none;
+}
+
+.button-4:-webkit-details-marker {
+  display: none;
+}
+
+.titulo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#tipo_tramite {
+  display: flex;
+  justify-content: space-between;
+}
+
+#requisitos_tramite_sol li,
+#documentos_tramite_sol li {
+  margin-left: 4.3%;
+}
+
+#hist_bool {
+  font-weight: bold;
+  font-style: italic;
+}
+
+#documentos_anexos {
+  display: flex;
+  justify-content: space-between;
+}
+
+#boton_enviar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input::file-selector-button {
+  width: 5.5vw;
+  height: 1.2vw;
+}
+
+input {
+  width: 15vw;
+  font-size: 0.7vw;
+}
+
+select {
+  width: 22vw;
+  font-size: 0.84vw;
+  padding: 2px 5px;
+}

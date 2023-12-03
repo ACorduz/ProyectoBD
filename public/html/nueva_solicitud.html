@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nueva Solicitud</title>
+    <link rel="stylesheet" href="../css/nueva_solicitud.css" />
+    <script
+      src="../javascript/nueva_solicitud.js"
+      type="text/javascript"
+      defer
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+    </style>
+  </head>
+  <body>
+    <div class="sidebar_menu">
+      <div>
+        <h3>Menu</h3>
+      </div>
+      <img src="../Imagenes/logo_unal_blanco-negro.png" alt="logo_unal" />
+      <h3 id="bienvenida">Bienvenido "usuario" :D</h3>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="mis_solicitudes.html">Mis Solicitudes</a></li>
+        <li><a href="nueva_solicitud.html">Nueva Solicitud</a></li>
+      </ul>
+      <div class="cerrar_sesion">Cerrar Sesión</div>
+    </div>
+    <div class="contenido">
+      <div class="titulo">
+        <h1>Nueva Solicitud</h1>
+      </div>
+      <div class="contenedor_sol">
+        <div class="solicitud">
+          <br />
+          <div id="tipo_tramite">
+            <b>Tipo de tramite</b>
+            <select name="selector" id="selector">
+              <option value="">Seleccione</option>
+              <option value="">Cursar Menos de la carga minima</option>
+              <option value="">
+                Cancelacion asignaturas posterior a mitad de semestre
+              </option>
+              <option value="">Cancelacion periodo academico</option>
+              <option value="">Doble Titulacion</option>
+              <option value="">Registro trabajo de grado</option>
+              <option value="">Reingreso</option>
+              <option value="">Reserva de cupo adicional</option>
+              <option value="">Traslado de programa Curricular</option>
+            </select>
+          </div>
+          <br /><br />
+          <b>Requisitos del tramite:</b>
+          <ol id="requisitos_tramite_sol">
+            <li>xxx</li>
+            <li>xxx</li>
+          </ol>
+          <b>Documentos Necesarios:</b>
+          <ol id="documentos_tramite_sol">
+            <li>xxx</li>
+            <li>xxx</li>
+          </ol>
+          <br />
+          <b id="hist_bool">
+            *Tu historia academica (no) cumple con los requisitos para radicar
+            esta solicitud.*
+          </b>
+          <br /><br /><br />
+          <div id="documentos_anexos">
+            <b>Documentos Anexos</b>
+            <input
+              type="file"
+              name="documentos"
+              multiple="multiple"
+              accept=".pdf,.png, .jpg, .jpeg"
+            />
+          </div>
+          <br /><br /><br />
+          <div id="boton_enviar">
+            <button class="button-4" role="button" onclick="nuevoComentario()">
+              Enviar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
