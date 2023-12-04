@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mis Solicitudes</title>
+    <title>Nueva Solicitud</title>
     <link rel="stylesheet" href="../css/nuevocomentario.css" />
+    <link rel="icon" href="../Imagenes/favicon.ico" type="image/x-icon">
     <script
-      src="../javascript/nuevocomentario.js"
+      src="../javascript/nueva_solicitud.js"
       type="text/javascript"
       defer
     ></script>
@@ -29,6 +30,9 @@
       <div class="cerrar_sesion">Cerrar Sesión</div>
     </div>
     <div class="contenido">
+      <div class="titulo">
+        <h1>Añadir Comentario</h1>
+      </div>
       <div class="contenedor_sol">
         <div class="solicitud">
           <a href="../html/mis_solicitudes.html" id="backButtonLink">
@@ -38,51 +42,32 @@
               id="backButton"
             />
           </a>
-          <b id="numero_sol">Solicitud #123</b>
-          <br /><br />
-          <b>Estado de la solicitud</b>
-          <p id="estado_sol">Iniciada/En proceso</p>
+          <b id="numero_sol">Solicitud #123</b> <br /><br /><br />
           <br />
-          <b>Etapa actual</b>
-          <p id="etapa_sol">Comite asesor de carrera</p>
-          <br />
-          <b>Informacion de la solicitud</b>
-          <p id="documento_sol">Documento de identidad: 123</p>
-          <p id="documentos_anexos_sol">Documentos anexos: xxx</p>
-          <p id="fecha_hora_sol">Fecha y hora de radicacion: xxx</p>
-          <p id="fecha_rta_sol">Fecha estimada de respuesta: xxx</p>
-          <br />
-          <b>Infromacion del tramite</b>
-          <p id="tramite_sol">Nombre del tramite:</p>
-          <p id="max_semana_sol">Numero de semana maxima:</p>
-          <br />
-          <b>Requisitos del tramite</b>
-          <ol id="requisitos_tramite_sol">
-            <li>xxx</li>
-            <li>xxx</li>
-          </ol>
-          <b id="requisitos_bool_sol">
-            *Requisitos (no) cumplidos para esta solicitud*
-          </b>
-          <br />
-          <br />
-          <b>Comentarios del Estudiante</b>
-          <ol id="comentarios_est_sol">
-            <li>xxx</li>
-            <li>xxx</li>
-          </ol>
-          <br />
-          <button class="button-4" role="button" onclick="nuevoComentario()">
-            Añadir Comentario
-          </button>
-          <br />
-          <br />
-          <br />
-          <b>Comentarios Administrativos</b>
-          <ol id="comentarios_adm_sol">
-            <li>xxx</li>
-            <li>xxx</li>
-          </ol>
+          <div id="comentarios">
+            <b>Comentario</b>
+            <textarea
+              id="comentario"
+              name="comentario"
+              maxlength="1000"
+              placeholder="Escriba su comentario aqui..."
+            ></textarea>
+          </div>
+          <div id="documentos_anexos">
+            <b>Anexar Documentos</b>
+            <input
+              type="file"
+              name="documentos"
+              multiple="multiple"
+              accept=".pdf,.png, .jpg, .jpeg"
+            />
+          </div>
+          <br /><br /><br />
+          <div id="boton_enviar">
+            <button class="button-4" role="button" onclick="nuevoComentario()">
+              Enviar
+            </button>
+          </div>
         </div>
       </div>
     </div>
