@@ -143,44 +143,8 @@ h3 {
   margin: 2vw;
 }
 
-#nombres input {
-  margin-left: 15.19vw;
-  margin-right: 18.3vw;
-  flex-grow: 1;
-  text-align: center;
-  width: 7vw;
-  height: 0.9vw;
-}
-
-#apellidos input {
-  margin-left: 15.254vw;
-  margin-right: 18.3vw;
-  flex-grow: 1;
-  text-align: center;
-  width: 7vw;
-  height: 0.9vw;
-}
-
 #correo input {
   margin-left: 11.429vw;
-  margin-right: 18.3vw;
-  flex-grow: 1;
-  text-align: center;
-  width: 7vw;
-  height: 0.9vw;
-}
-
-#telefono input {
-  margin-left: 15.419vw;
-  margin-right: 18.3vw;
-  flex-grow: 1;
-  text-align: center;
-  width: 7vw;
-  height: 0.9vw;
-}
-
-#fecha input {
-  margin-left: 10.9vw;
   margin-right: 18.3vw;
   flex-grow: 1;
   text-align: center;
@@ -205,21 +169,3 @@ h3 {
   width: 7vw;
   height: 0.9vw;
 }
-
-#documento{
-  display: flex;
-  justify-content: flex-start;
-}
-
-#documento select{
-  margin-left: 9.1vw;
-  height: 1.26vw;
-  width: 9.71vw;
-}
-
-#documento input{
-  margin-left: 1vw;
-  height: 0.94vw;
-  width: 10.52vw;
-}
-
