@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Dashboard</title>
+    <title>Mis Solicitudes</title>
     <link rel="stylesheet" href="../css/dashboard.css" />
     <link rel="icon" href="../Imagenes/favicon.ico" type="image/x-icon">
     <style>
@@ -11,54 +11,87 @@
     </style>
   </head>
   <body>
+    <script>
+      // Función para formatear la fecha
+      function formatearFecha(fecha) {
+        // Crea un objeto Date con la cadena de fecha proporcionada
+        const fechaObjeto = new Date(fecha);
+    
+        // Obtiene los componentes de la fecha y hora
+        const dia = fechaObjeto.getDate();
+        const mes = fechaObjeto.getMonth() + 1; // Los meses son de 0 a 11
+        const año = fechaObjeto.getFullYear();
+        const horas = fechaObjeto.getHours();
+        const minutos = fechaObjeto.getMinutes();
+        const segundos = fechaObjeto.getSeconds();
+    
+        // Formatea la fecha y hora como desees
+        const fechaFormateada = `${dia}/${mes}/${año} ${horas}:${minutos}:${segundos}`;
+    
+        return fechaFormateada;
+      }
+    </script>
     <div class="sidebar_menu">
       <div>
         <h3>Menu</h3>
       </div>
-      <img
-        src="../Imagenes/logo_unal_blanco-negro.png"
-        alt="logo_unal"
-        width="280"
-        height="147"
-      />
-      <h3>Bienvenido "usuario" :D</h3>
+      <img src="../Imagenes/logo_unal_blanco-negro.png" alt="logo_unal" />
+      <h3 id="bienvenida">Bienvenido  <%= usuario %> :D</h3>
       <ul>
-        <li>Dashboard</li>
-        <li>Mis Solicitudes</li>
-        <li>Nueva Solicitud</li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/mis_solicitudes">Mis Solicitudes</a></li>
+        <li><a href="/nueva_solicitud">Nueva Solicitud</a></li>
       </ul>
-      <div class="cerrar_sesion">Cerrar Sesión</div>
+      <a class="cerrar_sesion" href="/logout">Cerrar sesión</a>
     </div>
     <div class="contenido">
       <div class="titulo">
         <h1>Dashboard</h1>
       </div>
+      <br /><br />
+      <div class="contenedor_tablas">
+        <div>
+          <% if (exito) { %>
+            <div class="bootstrap-alert alert alert-success" role="alert">
+              <%= mensaje %>
+            </div>
+          <% } else if (error) { %>
+            <div class="bootstrap-alert alert alert-danger" role="alert">
+              <%= mensaje %>
+            </div>
+          <% } %>
+        </div>
+        <div class="comentarios_recientes" style="overflow-x: auto">
+          <h2>Comentarios Recibidos Recientes</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Id Comentario</th>
+                <th>Id Solicitud</th>
+                <th>Nombre del Tramite</th>
+                <th>Entidad Administrativa</th>
+                <th>Contenido</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% comentariosRecientes.forEach(function(comentario) { %>
+                <tr>
+                  <td><%= comentario.CAdmIdComentarioAdministrativo %></td>
+                  <td><%= comentario.CAdmSolicitudId %></td>
+                  <td><%= comentario.TraNombre %></td>
+                  <td><%= comentario.EtaNombreEtapa %></td>
+                  <td><%= comentario.CAdmContenido %></td>
+                  <td><script>document.write(formatearFecha('<%= comentario.CAdmFechaHora %>'));</script></td>
+                </tr>
+              <% }); %>
+            </tbody>
 
-      <div class="sol_activas">
-        <h2>Comentarios Recibidos Recientemente</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Id Comentario</th>
-              <th>Id Solicitud</th>
-              <th>Nombre del Tramite</th>
-              <th>Entidad Administrativa</th>
-              <th>Contenido</th>
-              <th>Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Celda 1</td>
-              <td>Celda 2</td>
-              <td>Celda 3</td>
-              <td>Celda 4</td>
-              <td>Celda 5</td>
-              <td>Celda 6</td>
-            </tr>
-          </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   </body>
+
 </html>
+
