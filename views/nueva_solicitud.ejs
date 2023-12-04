@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nueva Solicitud</title>
+    <link rel="stylesheet" href="../css/nueva_solicitud.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+    </style>
+  </head>
+  <body>
+    <div class="sidebar_menu">
+      <div>
+        <h3>Menu</h3>
+      </div>
+      <img src="../Imagenes/logo_unal_blanco-negro.png" alt="logo_unal" />
+      <h3 id="bienvenida">Bienvenido  <%= usuario %> :D</h3>
+      <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/mis_solicitudes">Mis Solicitudes</a></li>
+        <li><a href="/nueva_solicitud">Nueva Solicitud</a></li>
+      </ul>
+      <a class="cerrar_sesion" href="/logout">Cerrar sesión</a>
+    </div>
+    <div class="contenido">
+      <div class="titulo">
+        <h1>Nueva Solicitud</h1>
+      </div>
+      
+      <div class="contenedor_sol">
+
+        <form class="solicitud" method="POST" action="/crear_solicitud">
+          <br />
+          <div id="tipo_tramite">
+            <b>Tipo de tramite</b>
+            <select name="opcion" id="opcionSelect" onchange="mostrarResultados()">
+              <option>-- Selecionar Trámite --</option>
+              <% for (let i = 0; i < opciones.length; i++) { %>
+                <option value="<%= opciones[i].TraId %>"><%= opciones[i].TraNombre %></option>
+              <% } %>
+            </select>
+          </div>
+          <br /><br />
+          <b>Requisitos del tramite:</b>
+          <div id="resultadosTramite" style="display: none;"></div>
+                    <!--
+          <b>Documentos Necesarios:</b>
+          <ol id="documentos_tramite_sol">
+            <li>xxx</li>
+            <li>xxx</li>
+          </ol>
+          <br />
+          <b id="hist_bool">
+            *Tu historia academica (no) cumple con los requisitos para radicar
+            esta solicitud.*
+          </b>
+          <br /><br /><br />
+          <div id="documentos_anexos">
+            <b>Documentos Anexos</b>
+            <input
+              type="file"
+              name="documentos"
+              multiple="multiple"
+              accept=".pdf,.png, .jpg, .jpeg"
+            />
+          </div>
+          <br /><br /><br />
+          -->
+          <input type="hidden" name="numeroDocumento" id="numeroDocumento" value="<%= numeroDocumento %>">
+          <div id="boton_enviar">
+            <button class="button-4" type="submit">
+              Enviar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function mostrarResultados() {
+    var opcionSelect = document.getElementById("opcionSelect");
+    var selectedOption = opcionSelect.options[opcionSelect.selectedIndex];
+    console.log(selectedOption);
+    if (selectedOption.value !== '-- Selecionar Trámite --') {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          try {
+        // Intenta parsear la respuesta JSON recibida del servidor
+        var resultadosArray = JSON.parse(this.responseText);
+
+        // Verifica si resultadosArray es un array con al menos un elemento
+        if (Array.isArray(resultadosArray) && resultadosArray.length > 0) {
+          // Obtiene el primer elemento del array
+          var resultado = resultadosArray[0];
+
+          // Muestra los resultados en el contenedor
+          var resultadosContainer = document.getElementById("resultadosTramite");
+          // Limpia el contenido actual del contenedor
+          resultadosContainer.innerHTML = '';
+          resultadosContainer.style.display = "block"; // Muestra el contenedor
+
+          // Itera sobre las propiedades del objeto e imprímelas
+          for (var key in resultado) {
+            if (resultado.hasOwnProperty(key)) {
+              // Crea un nuevo elemento de párrafo para cada propiedad
+              var paragraph = document.createElement("p");
+              paragraph.innerHTML = "<strong>" + key + ":</strong> " + resultado[key];
+              resultadosContainer.appendChild(paragraph);
+            }
+          }
+        } else {
+          // Manejar el caso donde no se recibe un objeto válido
+          console.error('La respuesta no contiene un objeto válido:', resultadosArray);
+        }
+      } catch (error) {
+        // Manejar el caso donde no se puede parsear la respuesta como JSON
+        console.error('Error al parsear la respuesta JSON:', error);
+      }
+    }
+  };
+
+      // Obtén el nombre del trámite seleccionado
+      var nombreTramite = selectedOption.text;
+
+      // Realiza una solicitud GET al servidor, pasando el nombre del trámite
+      xhttp.open(
+        "GET",
+        "/obtener-resultados-tramite?tramite=" + encodeURIComponent(nombreTramite)+ "&numeroDocumento=" + encodeURIComponent('<%= numeroDocumento %>') + "&carrera=" + encodeURIComponent('<%= carrera %>'),
+        true
+      );
+      xhttp.send();
+    }
+  }
+</script>
