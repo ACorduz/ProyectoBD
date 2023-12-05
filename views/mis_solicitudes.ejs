@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Mis Solicitudes</title>
     <link rel="stylesheet" href="../css/mis_solicitudes.css" />
+    <link rel="icon" href="../Imagenes/favicon.ico" type="image/x-icon">
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
     </style>
@@ -65,7 +66,7 @@
               <% solicitudes.forEach(solicitud => { %>
                 <% if (solicitud.EstNombreEstado === 'Iniciado' || solicitud.EstNombreEstado === 'En proceso') { %>
                   <tr>
-                    <td><a href="/info_solicitud/<%= solicitud.SolId %>"><%= solicitud.SolId %></a></td>
+                    <td><a href="/info_solicitud/<%= solicitud.SolId %>"><u><%= solicitud.SolId %></u></a></td>
                     <td><%= solicitud.EstNombreEstado %></td>
                     <td><%= solicitud.traNombre %></td>
                     <td><script>document.write(formatearFecha('<%= solicitud.SolFechaEstimadaRespuesta %>'));</script></td>
@@ -97,7 +98,7 @@
               <% solicitudes.forEach(solicitud => { %>
                 <% if (solicitud.EstNombreEstado === 'Finalizado') { %>
                   <tr>
-                    <td><a href="/info_solicitud/<%= solicitud.SolId %>"><%= solicitud.SolId %></a></td>
+                    <td><a href="/info_solicitud/<%= solicitud.SolId %>"><u><%= solicitud.SolId %></u></a></td>
                     <td><%= solicitud.EstNombreEstado %></td>
                     <td><%= solicitud.traNombre %></td>
                     <td><script>document.write(formatearFecha('<%= solicitud.SolFechaEstimadaRespuesta %>'));</script></td>
