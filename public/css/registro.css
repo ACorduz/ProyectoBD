@@ -179,8 +179,8 @@ h3 {
   height: 0.9vw;
 }
 
-#fecha input {
-  margin-left: 10.9vw;
+#edad input {
+  margin-left: 16.93vw;
   margin-right: 18.3vw;
   flex-grow: 1;
   text-align: center;
@@ -206,20 +206,37 @@ h3 {
   height: 0.9vw;
 }
 
-#documento{
-  display: flex;
-  justify-content: flex-start;
+#documento input {
+  margin-left: 10.21vw;
+  margin-right: 18.3vw;
+  flex-grow: 1;
+  text-align: center;
+  width: 7vw;
+  height: 0.9vw;
 }
 
-#documento select{
-  margin-left: 9.1vw;
-  height: 1.26vw;
-  width: 9.71vw;
+#tipo_documento select {
+  margin-left: 11.59vw;
+  margin-right: 18.3vw;
+  flex-grow: 1;
+  text-align: center;
+  width: 7vw;
+  height: 1.3vw;
 }
 
-#documento input{
-  margin-left: 1vw;
-  height: 0.94vw;
-  width: 10.52vw;
+#tipo_documento label {
+  font-weight: bold;
 }
 
+#area_curricular label {
+  font-weight: bold;
+}
+
+#area_curricular select {
+  margin-left: 13.35vw;
+  margin-right: 18.3vw;
+  flex-grow: 1;
+  text-align: center;
+  width: 7vw;
+  height: 1.3vw;
+}
