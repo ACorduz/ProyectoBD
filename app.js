@@ -61,8 +61,6 @@ app.post('/iniciar-sesion', function(req, res){
         }
 
     });
-
-
 });
 
 // Ruta para manejar la página de dashboard
@@ -138,9 +136,10 @@ app.get('/logout', function(req, res) {
 
 // Ruta para la página de inicio de sesión
 app.get('/index', function(req, res) {
-    // Puedes renderizar la vista de inicio de sesión aquí
-    res.render('index');
-  });
+  // Puedes renderizar la vista de inicio de sesión aquí
+
+  res.render('index');
+});
 
 // Ruta para la página de nueva solicitud
 app.get('/nueva_solicitud', async function(req, res) {
@@ -290,7 +289,7 @@ app.get('/mis_solicitudes', async function(req, res) {
         JOIN Estado AS est ON she.SEstdEstadoId = est.EstId
         JOIN tramite AS tra ON sol.SolTramiteId = tra.TraId
       WHERE
-        sol.SolEstNumeroDocumento = 1001301429
+        sol.SolEstNumeroDocumento = ?
     )
     SELECT
       SolId,
@@ -325,6 +324,212 @@ function queryAsync(sql, values) {
     });
   });
 }
+
+// Ruta info_solicitud
+app.get('/info_solicitud/:id', async function(req, res) {
+  try {
+    const solicitudId = req.params.id;
+    const usuario = req.session.usuario;
+
+    // Realizar la consulta para obtener la información de la solicitud por ID
+    const solicitudResults = await queryAsync(`
+      SELECT
+        sol.SolId,
+        sol.SolEstNumeroDocumento,
+        sol.SolFechaHoraRadicacion,
+        sol.SolFechaEstimadaRespuesta,
+        est.EstNombreEstado,
+        tra.traNombre,
+        sol.SolFechaEstimadaRespuesta
+      FROM
+        solicitud AS sol
+        JOIN Solicitud_has_Estado AS she ON she.SEstSolicitudId = sol.solId
+        JOIN Estado AS est ON she.SEstdEstadoId = est.EstId
+        JOIN tramite AS tra ON sol.SolTramiteId = tra.TraId
+      WHERE
+        sol.SolId = ?
+    `, [solicitudId]);
+
+    if (!solicitudResults || solicitudResults.length === 0) {
+      // Manejar el caso si la solicitud no se encuentra
+      return res.status(404).send('Solicitud no encontrada');
+    }
+
+    const solicitud = solicitudResults[0];
+
+    // Realizar la consulta para obtener todos los comentarios del estudiante de la solicitud
+    const comentariosEstudianteResults = await queryAsync(`
+      SELECT
+        CEstContenido,
+        CEstFechaHora
+      FROM
+        ComentarioEstudiante
+      WHERE
+        CEstSolicitudId = ?
+    `, [solicitudId]);
+
+    const comentariosEstudiante = comentariosEstudianteResults;
+
+    // Realizar la consulta para obtener todos los comentarios del administrativo de la solicitud
+        const comentariosAdministrativoResults = await queryAsync(`
+        SELECT
+          CAdmContenido,
+          CAdmFechaHora
+        FROM
+          ComentarioAdministrativo
+        WHERE
+          CAdmSolicitudId = ?
+      `, [solicitudId]);
+  
+      const comentariosAdministrativo = comentariosAdministrativoResults;
+
+    // Renderizar la vista para mostrar la información de la solicitud
+    res.render('vista_solicitud', { solicitud, comentariosEstudiante, comentariosAdministrativo, usuario});
+  } catch (error) {
+    console.error('Error en la ruta /info_solicitud:', error);
+    return res.status(500).send('Error en la ruta /info_solicitud');
+  }
+});
+
+//Realizar comentario
+app.get('/comentarioEstudiante/:id', async function(req, res) {
+  try {
+    const solicitudId = req.params.id;
+    const usuario = req.session.usuario;
+
+     // Consulta SQL para obtener el número de documento
+     const sqlNumeroDocumento = 'SELECT usuNumeroDocumento FROM usuario WHERE UsuCorreoInstitucional = ?';
+     const numeroDocumentoResults = await queryAsync(sqlNumeroDocumento, [usuario]);
+ 
+     if (!numeroDocumentoResults || !numeroDocumentoResults[0]) {
+       console.error("No se encontró el número de documento para el usuario:", usuario);
+       // Manejar el caso sin resultados adecuadamente
+       return res.status(500).send('Error en la ruta /mis_solicitudes');
+     }
+ 
+     const numeroDocumento = numeroDocumentoResults[0].usuNumeroDocumento;
+
+     // Renderizar la vista para mostrar la información de la solicitud
+    res.render('nuevo_comentario', { solicitudId, numeroDocumento, usuario});
+
+  } catch (error) {
+    console.error('Error en la ruta /info_solicitud:', error);
+    return res.status(500).send('Error en la ruta /info_solicitud');
+  }
+});
+
+// Ruta para manejar la creación del comentario
+app.post('/crearComentario', async function (req, res) {
+  try {
+    const datos = req.body;
+
+    let comentario = datos.comentario;
+    let numeroDocumento = datos.numeroDocumento;
+    let solicitudId = datos.idSolicitud;
+
+
+    // Llama al procedimiento almacenado
+    const resultadoSP = await queryAsync(
+      'CALL sp_estudianteCrearComentarioSolicitud(?, ?, ?)',
+      [comentario, numeroDocumento, solicitudId]
+    );
+
+    // Analiza el resultado del procedimiento almacenado
+    const mensaje = resultadoSP[0][0].Mensaje;
+
+    // Puedes realizar cualquier otra lógica necesaria después de crear el comentario
+
+    // Redirige a la página de información de la solicitud
+    res.redirect(`/info_solicitud/${solicitudId}`);
+  } catch (error) {
+    console.error('Error en la ruta /crearComentario', error);
+    return res.status(500).send('Error en la ruta /crearComentario');
+  }
+});
+
+//Ruta para registro usuario
+app.post('/registro', async function (req, res) {
+  try {
+    const {
+      tipoDocumento,
+      numeroDocumento,
+      nombres,
+      apellidos,
+      telefono,
+      edad,
+      email,
+      password,
+      areaCurricular,
+      organismoColegiado,
+    } = req.body;
+
+    // Llama al procedimiento almacenado
+    const resultadoSP = await queryAsync(
+      'CALL sp_registroEstudiantes(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      [
+        tipoDocumento,
+        numeroDocumento,
+        nombres,
+        apellidos,
+        telefono,
+        edad, // Suponiendo que tienes una función para calcular la edad
+        email,
+        password,
+        areaCurricular,
+        organismoColegiado,
+      ]
+    );
+
+    // Analiza el resultado del procedimiento almacenado
+    const mensaje = resultadoSP[0][0].Mensaje;
+
+    // Puedes realizar cualquier otra lógica necesaria después de registrar al usuario
+
+    // Redirige a la página de inicio de sesión u otra página según tus necesidades
+    res.redirect('/index');
+  } catch (error) {
+    console.error('Error en la ruta /registro', error);
+    return res.status(500).send('Error en la ruta /registro');
+  }
+});
+
+app.get("/registrarse", async function(req, res){
+  const tiposDocumento= await queryAsync('SELECT TDocIdTipoDocumento, TDocDescripcion FROM TipoDocumento');
+
+  res.render("registro", {opciones: tiposDocumento});
+});
+
+
+//Ruta cambiar contraseña
+app.get("/recuperarPass", function(req, res){
+
+  res.render("recuperarPass");
+});
+
+app.post('/recuperarPassword', async function (req, res) {
+  try {
+    const { email, nuevaContrasena, confirmarContrasena } = req.body;
+
+    // Verificar que las contraseñas coincidan
+    if (nuevaContrasena !== confirmarContrasena) {
+      return res.status(400).send('Las contraseñas no coinciden');
+    }
+
+    // Llamar al procedimiento almacenado para cambiar la contraseña
+    const resultadoSP = await queryAsync('CALL sp_cambiarContrasena(?, ?)', [
+      email,
+      nuevaContrasena,
+    ]);
+
+    // Analizar el resultado del procedimiento almacenado
+    const mensaje = resultadoSP[0][0].Mensaje;
+
+    // Redirige a la página de inicio de sesión u otra página según tus necesidades
+    res.redirect('/index?mensajeCambioPass=CambioExitoso');
+  } catch (error) {
+    console.error('Error en la ruta /recuperarPassword', error);
+  }
+});
 
 
 //middleware :::::::::::::::::::::::::::::

@@ -21,32 +21,32 @@
     </div>
     <div class="contenido">
       <div class="contenedor_form">
-        <div class="form">
+        <form class="form" method="POST" action="/recuperarPassword">
           <div id="imagen">
             <img src="../Imagenes/logo_unal_blanco-negro.png" alt="logo_unal" />
           </div>
           <h3>Asignar nueva contraseña</h3>
           <div class="input_container" id="correo">
             <b>Correo Institucional:</b>
-            <input type="email" required />
+            <input type="email" name="email" id="email" required />
           </div>
           <div class="input_container" id="contraseña">
             <b>Nueva Contraseña:</b>
-            <input type="password" required />
+            <input type="password" name="nuevaContrasena" id="nuevaContrasena" required />
           </div>
           <div class="input_container" id="contraseña_verificacion">
             <b>Repite la contraseña:</b>
-            <input type="password" required />
+            <input type="password" name="confirmarContrasena" id="confirmarContrasena" required />
           </div>
           <div id="boton_enviar">
-            <button class="button-4" role="button" onclick="cambiarcontraseña()">
+            <button class="button-4" role="button" type="submit">
               Cambiar contraseña
             </button>
           </div>
           <div class="input_container" id="link_inicia_sesion">
             <p>
               ¿La recordaste?
-              <a href="../../index.html">Inicia Sesión</a>
+              <a href="/index">Inicia Sesión</a>
             </p>
           </div>
         </div>
