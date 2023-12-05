@@ -21,28 +21,28 @@
         <h3>Menu</h3>
       </div>
       <img src="../Imagenes/logo_unal_blanco-negro.png" alt="logo_unal" />
-      <h3 id="bienvenida">Bienvenido "usuario" :D</h3>
+      <h3 id="bienvenida">Bienvenido  <%= usuario %> :D</h3>
       <ul>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="mis_solicitudes.html">Mis Solicitudes</a></li>
-        <li><a href="nueva_solicitud.html">Nueva Solicitud</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/mis_solicitudes">Mis Solicitudes</a></li>
+        <li><a href="/nueva_solicitud">Nueva Solicitud</a></li>
       </ul>
-      <div class="cerrar_sesion">Cerrar Sesión</div>
+      <a class="cerrar_sesion" href="/logout">Cerrar sesión</a>
     </div>
     <div class="contenido">
       <div class="titulo">
         <h1>Añadir Comentario</h1>
       </div>
       <div class="contenedor_sol">
-        <div class="solicitud">
-          <a href="../html/mis_solicitudes.html" id="backButtonLink">
+        <form class="solicitud" method="POST" action="/crearComentario">
+          <a href="/info_solicitud/<%= solicitudId %>" id="backButtonLink">
             <img
               src="../Imagenes/back_button.png"
               alt="Back Button"
               id="backButton"
             />
           </a>
-          <b id="numero_sol">Solicitud #123</b> <br /><br /><br />
+          <b id="numero_sol">Solicitud# <%= solicitudId %> </b> <br /><br /><br />
           <br />
           <div id="comentarios">
             <b>Comentario</b>
@@ -53,6 +53,7 @@
               placeholder="Escriba su comentario aqui..."
             ></textarea>
           </div>
+          <!--
           <div id="documentos_anexos">
             <b>Anexar Documentos</b>
             <input
@@ -61,14 +62,16 @@
               multiple="multiple"
               accept=".pdf,.png, .jpg, .jpeg"
             />
-          </div>
+          </div>-->
           <br /><br /><br />
+          <input type="hidden" name="numeroDocumento" value="<%= numeroDocumento %> ">
+          <input type="hidden" name="idSolicitud" value="<%= solicitudId %>">
           <div id="boton_enviar">
-            <button class="button-4" role="button" onclick="nuevoComentario()">
+            <button class="button-4" role="button" type="submit">
               Enviar
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </body>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mis Solicitudes</title>
+    <link rel="stylesheet" href="../css/vista_solicitud.css" />
+    <link rel="icon" href="../Imagenes/favicon.ico" type="image/x-icon">
+    <script
+      src="../javascript/vista_solicitud.js"
+      type="text/javascript"
+      defer
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+    </style>
+  </head>
+  <body>
+    <script>
+      // Función para formatear la fecha
+      function formatearFecha(fecha) {
+        // Crea un objeto Date con la cadena de fecha proporcionada
+        const fechaObjeto = new Date(fecha);
+    
+        // Obtiene los componentes de la fecha y hora
+        const dia = fechaObjeto.getDate();
+        const mes = fechaObjeto.getMonth() + 1; // Los meses son de 0 a 11
+        const año = fechaObjeto.getFullYear();
+        const horas = fechaObjeto.getHours();
+        const minutos = fechaObjeto.getMinutes();
+        const segundos = fechaObjeto.getSeconds();
+    
+        // Formatea la fecha y hora como desees
+        const fechaFormateada = `${dia}/${mes}/${año}`;
+    
+        return fechaFormateada;
+      }
+    </script>
+    <div class="sidebar_menu">
+      <div>
+        <h3>Menu</h3>
+      </div>
+      <img src="../Imagenes/logo_unal_blanco-negro.png" alt="logo_unal" />
+      <h3 id="bienvenida">Bienvenido  <%= usuario %> :D</h3>
+      <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/mis_solicitudes">Mis Solicitudes</a></li>
+        <li><a href="/nueva_solicitud">Nueva Solicitud</a></li>
+      </ul>
+      <a class="cerrar_sesion" href="/logout">Cerrar sesión</a>
+    </div>
+    <div class="contenido">
+      <div class="contenedor_sol">
+        <div class="solicitud">
+          <a href="/mis_solicitudes" id="backButtonLink">
+            <img
+              src="../Imagenes/back_button.png"
+              alt="Back Button"
+              id="backButton"
+            />
+          </a>
+          <b id="numero_sol">Solicitud #<%= solicitud.SolId %></b>
+          <br /><br />
+          <b>Estado de la solicitud</b>
+          <p id="estado_sol"><%= solicitud.EstNombreEstado%></p>
+          <br />
+          <b>Informacion de la solicitud</b>
+          <p id="documento_sol">Documento de identidad: <%= solicitud.SolEstNumeroDocumento%></p>
+          <p id="fecha_hora_sol">Fecha y hora de radicacion: <script>document.write(formatearFecha('<%= solicitud.SolFechaHoraRadicacion%>'));</script></p>
+          <p id="fecha_rta_sol">Fecha estimada de respuesta: <script>document.write(formatearFecha('<%= solicitud.SolFechaEstimadaRespuesta%>'));</script></p>
+          <br />
+          <b>Infromacion del tramite</b>
+          <p id="tramite_sol"><%= solicitud.traNombre%></p>
+          <br />
+          <b>Comentarios del Estudiante</b>
+          <ol id="comentarios_est_sol">
+            <% comentariosEstudiante.forEach(comentario => { %>
+              <li><%= comentario.CEstContenido %> - - <script>document.write(formatearFecha('<%= comentario.CEstFechaHora %>'));</script></li>
+            <% }); %>
+          </ol>
+          <br />
+          <button class="button-4" role="button">
+            <a href="/comentarioEstudiante/<%= solicitud.SolId %>">Añadir Comentario</a>
+          </button>
+          <br />
+          <br />
+          <br />
+          <b>Comentarios Administrativos</b>
+          <ol id="comentarios_adm_sol">
+            <% comentariosAdministrativo.forEach(comentario => { %>
+              <li><%= comentario.CAdmContenido %> - - <script>document.write(formatearFecha('<%= comentario.CAdmFechaHora %>'));</script></li>
+            <% }); %>
+          </ol>
+          <br />
+          </ol>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

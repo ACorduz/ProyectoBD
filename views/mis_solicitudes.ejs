@@ -65,7 +65,7 @@
               <% solicitudes.forEach(solicitud => { %>
                 <% if (solicitud.EstNombreEstado === 'Iniciado' || solicitud.EstNombreEstado === 'En proceso') { %>
                   <tr>
-                    <td><%= solicitud.SolId %></td>
+                    <td><a href="/info_solicitud/<%= solicitud.SolId %>"><%= solicitud.SolId %></a></td>
                     <td><%= solicitud.EstNombreEstado %></td>
                     <td><%= solicitud.traNombre %></td>
                     <td><script>document.write(formatearFecha('<%= solicitud.SolFechaEstimadaRespuesta %>'));</script></td>
@@ -97,7 +97,7 @@
               <% solicitudes.forEach(solicitud => { %>
                 <% if (solicitud.EstNombreEstado === 'Finalizado') { %>
                   <tr>
-                    <td><%= solicitud.SolId %></td>
+                    <td><a href="/info_solicitud/<%= solicitud.SolId %>"><%= solicitud.SolId %></a></td>
                     <td><%= solicitud.EstNombreEstado %></td>
                     <td><%= solicitud.traNombre %></td>
                     <td><script>document.write(formatearFecha('<%= solicitud.SolFechaEstimadaRespuesta %>'));</script></td>

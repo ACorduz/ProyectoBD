@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="../css/registro.css" />
+    <link rel="icon" href="../Imagenes/favicon.ico" type="image/x-icon" />
+    <script
+      src="../javascript/registro.js"
+      type="text/javascript"
+      defer
+    ></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
+    </style>
+  </head>
+  <body>
+    <div class="titulo">
+      <h1>Bienvenido al Sistema de Solicitudes Estudiantiles - UNAL</h1>
+    </div>
+    <div class="contenido">
+      <div class="contenedor_form">
+        <form class="form" method="POST" action="/registro">
+          <div id="imagen">
+            <img src="../Imagenes/logo_unal_blanco-negro.png" alt="logo_unal" />
+          </div>
+          <h3>Regístrate</h3>
+          <div class="input_container" id="nombres">
+            <b>Nombres:</b>
+            <input type="text" id="nombres" name="nombres" required />
+          </div>
+          <div class="input_container" id="apellidos">
+            <b>Apellidos:</b>
+            <input type="text" id="apellidos" name="apellidos" required />
+          </div>
+          <div class="input_container" id="documento">
+            <label for="tipoDocumento">Tipo de Documento</label>
+            <select name="tipoDocumento" id="tipoDocumento">
+              <option>-- Selecionar Tipo de Documento--</option>
+              <% for (let i = 0; i < opciones.length; i++) { %>
+                <option value="<%= opciones[i].TDocIdTipoDocumento%>"><%= opciones[i].TDocDescripcion %></option>
+              <% } %>
+            </select>
+          </div>
+          <div class="input_container" id="documento">
+            <b>Número de Documento</b>
+            <input type="number" id="numeroDocumento" name="numeroDocumento" required />
+          </div>
+          <div class="input_container" id="correo">
+            <b>Correo Institucional:</b>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="input_container" id="telefono">
+            <b>Telefono:</b>
+            <input type="tel" id="telefono" name="telefono" required />
+          </div>
+          <div class="input_container" id="fecha">
+            <b>Edad</b>
+            <input type="int" id="edad" name="edad" required />
+          </div>
+          <div class="input_container">
+          <label for="areaCurricular">Área Curricular</label>
+          <select name="areaCurricular" id="areaCurricular">
+            <option value="Área curricular de Ingeniería Civil y Agrícola">Área curricular de Ingeniería Civil y Agrícola</option>
+            <option value="Área curricular de Ingeniería de Sistemas e Industrial">Área curricular de Ingeniería de Sistemas e Industrial</option>
+            <option value="Área curricular de Ingeniería Eléctrica y Electrónica">Área curricular de Ingeniería Eléctrica y Electrónica</option>
+            <option value="Área curricular de Ingeniería Mecánica y Mecatrónica">Área curricular de Ingeniería Mecánica y Mecatrónica</option>
+            <option value="Área curricular de Ingeniería Químicay Ambiental">Área curricular de Ingeniería Químicay Ambiental</option>
+          </select>
+        </div>
+          <div class="input_container" id="contraseña">
+            <b>Nueva Contraseña:</b>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <!--
+          <div class="input_container" id="contraseña_verificacion">
+            <b>Repite la contraseña:</b>
+            <input type="password" required />
+          </div>
+          -->
+          <input type="hidden" name="organismoColegiado" id="organismoColegiado" value="0">
+          <div id="boton_enviar">
+            <button class="button-4" role="button" type="submit">
+              Regístrarme
+            </button>
+          </div>
+          <div class="input_container" id="link_inicia_sesion">
+            <p>
+              ¿Ya estás registrado?
+              <a href="/index">Inicia Sesión</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
